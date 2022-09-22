@@ -14,4 +14,36 @@ CHIP And16 {
 
     PARTS:
     // Put your code here:
+        Nand(a=a[0], b=b[0], out=notaOrb0);
+    Not(in=notaOrb0, out=out[0]);
+    Nand(a=a[1], b=b[1], out=notaOrb1);
+    Not(in=notaOrb1, out=out[1]);
+    Nand(a=a[2], b=b[2], out=notaOrb2);
+    Not(in=notaOrb2, out=out[2]);
+    Nand(a=a[3], b=b[3], out=notaOrb3);
+    Not(in=notaOrb3, out=out[3]);
+    Nand(a=a[4], b=b[4], out=notaOrb4);
+    Not(in=notaOrb4, out=out[4]);
+    Nand(a=a[5], b=b[5], out=notaOrb5);
+    Not(in=notaOrb5, out=out[5]);
+    Nand(a=a[6], b=b[6], out=notaOrb6);
+    Not(in=notaOrb6, out=out[6]);
+    Nand(a=a[7], b=b[7], out=notaOrb7);
+    Not(in=notaOrb7, out=out[7]);
+    Nand(a=a[8], b=b[8], out=notaOrb8);
+    Not(in=notaOrb8, out=out[8]);
+    Nand(a=a[9], b=b[9], out=notaOrb9);
+    Not(in=notaOrb9, out=out[9]);
+    Nand(a=a[10], b=b[10], out=notaOrb10);
+    Not(in=notaOrb10, out=out[10]);
+    Nand(a=a[11], b=b[11], out=notaOrb11);
+    Not(in=notaOrb11, out=out[11]);
+    Nand(a=a[12], b=b[12], out=notaOrb12);
+    Not(in=notaOrb12, out=out[12]);
+    Nand(a=a[13], b=b[13], out=notaOrb13);
+    Not(in=notaOrb13, out=out[13]);
+    Nand(a=a[14], b=b[14], out=notaOrb14);
+    Not(in=notaOrb14, out=out[14]);
+    Nand(a=a[15], b=b[15], out=notaOrb15);
+    Not(in=notaOrb15, out=out[15]);
 }
