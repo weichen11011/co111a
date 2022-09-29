@@ -16,4 +16,17 @@ CHIP RAM16K {
 
     PARTS:
     // Put your code here:
+
+    //選取記憶體
+    DMux4Way(in=load,sel=address[0..1],a=a,b=b,c=c,d=d);
+
+    //存取
+    RAM4K(in=in,load=a,address=address[2..13],out=aout);
+    RAM4K(in=in,load=b,address=address[2..13],out=bout);
+    RAM4K(in=in,load=c,address=address[2..13],out=cout);
+    RAM4K(in=in,load=d,address=address[2..13],out=dout);
+ 
+
+    //輸出
+    Mux4Way16(a=aout,b=bout,c=cout,d=dout,sel=address[0..1],out=out);    
 }
