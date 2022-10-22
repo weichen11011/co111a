@@ -13,3 +13,53 @@
 
 // Put your code here.
 
+// check input
+(start)
+@KBD
+D=M
+@Black
+D;JNE
+@White
+D;JEQ
+
+
+// white
+(White)
+@8192
+D=A
+(white)
+@16384
+A=D+A
+M=0
+D=D-1
+@white
+D;JGE
+@24576
+D=M
+@White
+D;JEQ
+
+// black
+(Black)
+@8192
+D=A
+(black)
+@16384
+A=D+A
+M=-1
+D=D-1
+@black
+D;JGE
+@24576
+D=M
+@Black
+D;JNE
+
+@start
+0;JMP
+
+
+
+
+
+
