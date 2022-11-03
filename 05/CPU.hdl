@@ -40,4 +40,9 @@ CHIP CPU {
 
     PARTS:
     // Put your code here:
+
+    Not(in = instruction[15], out = notinstruction)
+    Not(in = notinstruction, out = decode)
+
+    
 }
