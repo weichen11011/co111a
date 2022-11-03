@@ -41,8 +41,76 @@ CHIP CPU {
     PARTS:
     // Put your code here:
 
-    Not(in = instruction[15], out = notinstruction)
-    Not(in = notinstruction, out = decode)
+    //registerA
+    ARegister(in=ina, load=loada, out=outa, out[0..14]=addressM);
 
+    //registerD
+    DRegister(in=outALU, load=loadd, out=outd);
+
+    //ALU
+    ALU(x=outd, y=outam, zx=instruction[11], nx=instruction[10], zy=instruction[9], ny=instruction[8], f=instruction[7], no=instruction[6], out=outM, out=outALU ,zr=zr, ng=ng);
     
+    //Mux
+    Mux16(a=outALU, b=instruction, sel=insta, out=ina);
+    Mux16(a=outa, b=inM, sel=amtoalu, out=outam);
+
+    //pc
+    PC(in=outa, load=loadpc, inc=true, reset=reset, out[0..14]=pc);
+
+    //decoder
+        //insta
+        Not(in=instruction[15], out=insta);
+
+        //loada
+        And(a=instc, b=instruction[5], out=desta);
+        Or(a=insta, b=desta, out=loada);
+
+        //loadd
+        And(a=instruction[15], b=instruction[4], out=loadd);
+
+        //loadpc
+         //JGT
+         Not(in=insta, out=instc);
+         //zr ng
+         Or(a=zr, b=ng, out=outzr);
+         Not(in=outzr, out=post);
+         And(a=instruction[0], b=post, out=JGT);
+
+         //JEQ
+         And(a=instruction[1], b=zr, out=JEQ);
+
+         //JLT
+         And(a=instruction[2], b=ng, out=JLT);
+
+         //JGE
+         Or(a=JGT, b=JEQ, out=JGE);
+
+         //JNE
+         Or(a=JLT, b=JGT, out=JNE);
+
+         //JLE
+         Or(a=JEQ, b=JLT, out=JLE);
+
+         //JMP
+         Or(a=JGT, b=JLE, out=JMP);
+
+         //Nested Or structure
+         Or(a=JGT, b=JEQ, out=j1);
+         Or(a=JLT, b=j1, out=j2);
+         Or(a=JGE, b=j2, out=j3);
+         Or(a=JNE, b=j3, out=j4);
+         Or(a=JLE, b=j4, out=j5);
+         Or(a=JMP, b=j5, out=j6);
+
+         And(a=instc, b=j6, out=loadpc);
+
+    //insta
+    //Am to ALU
+    And(a=instc, b=instruction[12], out=amtoalu);
+
+    //load am
+    And(a=instc, b=instruction[3], out=loadm, out = writeM);
+
+
+
 }
