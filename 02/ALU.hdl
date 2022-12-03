@@ -67,12 +67,14 @@ CHIP ALU {
     Not16(in = fxy, out = nfxy);
     Mux16(a = fxy, b = nfxy, sel = no, out[0..7] = ret0, out[8..14] = ret1, out[15] = retsign, out = out);
 
+    //zr
     Or8Way(in[0..7] = ret0, out = ret0is0);
     Or8Way(in[0..6] = ret1, in[7] = retsign, out = ret1is0);
 
     Or(a = ret0is0, b = ret1is0, out = yzr);
     Not(in = yzr, out = zr);
-
+    
+    //ng
     And(a = retsign, b = true, out = ng);
 
 }
