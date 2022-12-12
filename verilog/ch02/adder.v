@@ -1,4 +1,4 @@
-`include "../ch01/gate.v"
+`include "./gate.v"
 
 module HalfAdder(input a,b,output sum,carry);
     Xor g1(a,b,sum);
