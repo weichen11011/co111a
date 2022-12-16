@@ -1,4 +1,4 @@
-`include "./gate.v"
+`include "./gates.v"
 
 module And16 (input[15:0] a,b , output[15:0] out);
   And g00(a[0],b[0],out[0]);

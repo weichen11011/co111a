@@ -1,4 +1,4 @@
-`include "./gate16.v"
+`include "./gates.v"
 
 module main;
 reg  [15:0] a,b;
