@@ -73,18 +73,18 @@ module RAM64(input[15:0] in, input clock,load, input[5:0] address, output[15:0] 
     wire[15:0] out1,out2,out3,out4,out5,out6,out7,out8;
     Dmux8Way g1(load,address[5:3],a,b,c,d,e,f,g,h);
 
-    RAM8 g2(in,clock,address[2:0],a,out1);
-    RAM8 g3(in,clock,address[2:0],b,out2);
-    RAM8 g4(in,clock,address[2:0],c,out3);
-    RAM8 g5(in,clock,address[2:0],d,out4);
-    RAM8 g6(in,clock,address[2:0],e,out5);
-    RAM8 g7(in,clock,address[2:0],f,out6);
-    RAM8 g8(in,clock,address[2:0],g,out7);
-    RAM8 g9(in,clock,address[2:0],h,out8);
+    RAM8 g2(in,clock,a,address[2:0],out1);
+    RAM8 g3(in,clock,b,address[2:0],out2);
+    RAM8 g4(in,clock,c,address[2:0],out3);
+    RAM8 g5(in,clock,d,address[2:0],out4);
+    RAM8 g6(in,clock,e,address[2:0],out5);
+    RAM8 g7(in,clock,f,address[2:0],out6);
+    RAM8 g8(in,clock,g,address[2:0],out7);
+    RAM8 g9(in,clock,h,address[2:0],out8);
 
     Mux8Way16 g10(out1,out2,out3,out4,out5,out6,out7,out8,address[5:3],out);
 endmodule
-
+/*
 module RAM512(input[15:0] in, input clock,load, input[8:0] address, output[15:0] out);
     wire a,b,c,d,e,f,g,h;
     wire[15:0] out1,out2,out3,out4,out5,out6,out7,out8;
@@ -134,4 +134,32 @@ module RAM16K(input[15:0] in, input clock,load, input[13:0] address, output[15:0
     Mux8Way16 g10(out1,out2,out3,out4,out5,out6,out7,out8,address[13:11],out);
 
 endmodule
+*/
+
+module ROM32K(input[14:0] address, output[15:0] out);
+    reg[15:0] m[0:2**15-1];
+
+    assign out = m[address];
+endmodule
+
+module RAM8K(input[15:0] in, input clock, load, input[12:0] address, output[15:0] out);
+    reg[15:0] m[0:2**13-1];
+
+    assign out = m[address];
+
+    always @(posedge clock) begin
+    if (load) m[address] = in;
+    end
+endmodule
+
+module RAM16K(input[15:0] in, input clock, load, input[13:0] address, output[15:0] out);
+    reg[15:0] m[0:2**14-1];
+
+    assign out = m[address];
+
+    always @(posedge clock) begin
+        if (load) m[address] = in;
+    end
+endmodule
+
 
