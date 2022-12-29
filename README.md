@@ -6,8 +6,9 @@
 1. https://www.youtube.com/watch?v=CBeVn-RSavk 這個是CPU的
 2. https://www.youtube.com/watch?v=ckYSlJtpXaE&t=4s 這個是memory的
 
-!<image>(https://github.com/weichen11011/co111a/blob/main/%E8%9E%A2%E5%B9%95%E6%93%B7%E5%8F%96%E7%95%AB%E9%9D%A2%202022-12-29%20102543.png)
-!<
+![image](https://github.com/weichen11011/co111a/blob/main/%E8%9E%A2%E5%B9%95%E6%93%B7%E5%8F%96%E7%95%AB%E9%9D%A2%202022-12-29%20102543.png)
+![image]
+
 
 ## 期末 
 #### 邏輯閘程式碼除 *ALU* 修改自老師的專案 其餘皆改寫自期中所做的1~5章習題
