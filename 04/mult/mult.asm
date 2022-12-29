@@ -8,32 +8,28 @@
 
 // Put your code here.
 
-@sum
-M=0   
-@i
-M=1 
-
+@R2
+M=0
 (LOOP)
-@i    
-D=M   
-@R0
-D=D-M 
-@END
-D;JGT  
-
+// If R1 <= 0, terminate.
 @R1
-D=M   
-@sum
-M=D+M  
-@i
-M=M+1  
-@LOOP
-0;JMP
-  
-(END)
-@sum
+D=M
+@END
+D;JLE
+// Add R0 to R2.
+@R0
 D=M
 @R2
-M=D
+M=M+D
+// Decerement R1.
+@R1
+M=M-1
+// Loop.
+@LOOP
+0;JMP
+(END)
+// Terminate.
+@END
+0;JMP
 
 
