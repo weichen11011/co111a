@@ -4,7 +4,7 @@
 
 第二章的ALU是參考自老師的版本
 
-第三章pc 
+第三章pc https://nand2tetris-hdl.github.io/
 
 ![image](https://github.com/weichen11011/co111a/blob/main/image.png)
 
