@@ -2,6 +2,12 @@
 
 ## 期中
 
+第二章的ALU是參考自老師的版本
+
+第三章pc 
+
+![image](https://github.com/weichen11011/co111a/blob/main/image.png)
+
 第四章mult https://github.com/davidsmithmke/nand2tetris-project4/blob/master/mult/Mult.asm
 
 第五章是照著影片的教學一步步寫出來的
