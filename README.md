@@ -1,8 +1,9 @@
 # 課程：計算機結構 -- 筆記、習題與報告
 
 ## 期中
-第四章mult
-1. https://github.com/davidsmithmke/nand2tetris-project4/blob/master/mult/Mult.asm
+
+第四章mult https://github.com/davidsmithmke/nand2tetris-project4/blob/master/mult/Mult.asm
+
 第五章是照著影片的教學一步步寫出來的
 影片網址: 
 1. https://www.youtube.com/watch?v=CBeVn-RSavk 這個是CPU的
