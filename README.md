@@ -70,7 +70,21 @@ if (out < 0) set ng = 1
 
 inc16 為16位元遞增器，能使整個電路為1。第一個是在控制這個迴圈電路，後面兩個Mux分別是決定要寫入還是要重製。如果有要寫入的值會傳給Reg然後這裡的load設為true代表一定會寫入，之後再將值輸出然後再繼續回到迴圈。
 
-### 第四章mult https://github.com/davidsmithmke/nand2tetris-project4/blob/master/mult/Mult.asm
+### 第四章mult 
+
+A指令:
+為16位元的二進制表示 Ex: @21
+
+C指令:
+包含comp,dest,jump的使用 
+
+comp [6:12] 決定暫存器和運算
+
+dest [3:5] 決定存在哪裡
+
+jump [0:2] 決定運算結果和0的條件判斷，跳轉位置須提前存在A暫存器
+
+https://github.com/davidsmithmke/nand2tetris-project4/blob/master/mult/Mult.asm
 
 ### 第五章是照著影片的教學一步步寫出來的
 影片網址: 
@@ -78,7 +92,7 @@ inc16 為16位元遞增器，能使整個電路為1。第一個是在控制這�
 2. https://www.youtube.com/watch?v=ckYSlJtpXaE&t=4s 這個是memory的
 
 ![image](https://github.com/weichen11011/co111a/blob/main/%E8%9E%A2%E5%B9%95%E6%93%B7%E5%8F%96%E7%95%AB%E9%9D%A2%202022-12-29%20102543.png)
-![image](https://github.com/weichen11011/co111a/blob/main/%E8%9E%A2%E5%B9%95%E6%93%B7%E5%8F%96%E7%95%AB%E9%9D%A2%202022-12-29%20102639.png)
+
 
 ### CPU
 ![image](https://github.com/weichen11011/co111a/blob/main/2.PNG)
@@ -164,6 +178,8 @@ inc 設為true 就是不管怎麼樣都會寫入。
 ## Memory
 
 ![image](https://github.com/weichen11011/co111a/blob/main/4.PNG)
+
+![image](https://github.com/weichen11011/co111a/blob/main/%E8%9E%A2%E5%B9%95%E6%93%B7%E5%8F%96%E7%95%AB%E9%9D%A2%202022-12-29%20102639.png)
 
     //load dmux
     DMux4Way(in= load, sel= address[13..14], a=ramloada, b=ramloadb, c=screenload);
