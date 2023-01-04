@@ -2,15 +2,77 @@
 
 ## 期中
 
-第二章的ALU是參考自老師的版本
+### 第二章的ALU是參考自老師的版本
 
-第三章pc https://nand2tetris-hdl.github.io/
+    // zx
+    Mux16(a = x, b[0..15] = false, sel = zx, out = ozx);
+
+    // nx
+    Not16(in = ozx, out = nnx);
+    Mux16(a = ozx, b = nnx, sel = nx, out = exx);
+
+    // zy
+    Mux16(a = y, b[0..15] = false, sel = zy, out = ozy);
+
+    // ny
+    Not16(in = ozy, out = nny);
+    Mux16(a = ozy, b = nny, sel = ny, out = exy);
+
+    // f
+    Add16(a = exx, b = exy, out = xplusy);
+    And16(a = exx, b = exy, out = xandy);
+    Mux16(a = xandy, b = xplusy, sel = f, out = fxy);
+
+    //no
+    Not16(in = fxy, out = nfxy);
+    Mux16(a = fxy, b = nfxy, sel = no, out[0..7] = ret0, out[8..14] = ret1, out[15] = retsign, out = out);
+
+    //zr
+    Or8Way(in[0..7] = ret0, out = ret0is0);
+    Or8Way(in[0..6] = ret1, in[7] = retsign, out = ret1is0);
+
+    Or(a = ret0is0, b = ret1is0, out = yzr);
+    Not(in = yzr, out = zr);
+    
+    //ng
+    And(a = retsign, b = true, out = ng);
+    
+if (zx == 1) set x = 0        // 16-bit constant
+
+if (nx == 1) set x = !x       // bitwise not
+
+if (zy == 1) set y = 0        // 16-bit constant
+
+if (ny == 1) set y = !y       // bitwise not
+
+if (f == 1)  set out = x + y  // integer 2's complement addition
+
+if (f == 0)  set out = x & y  // bitwise and
+
+if (no == 1) set out = !out   // bitwise not
+
+if (out == 0) set zr = 1
+
+if (out < 0) set ng = 1
+
+此為ALU輸出分別代表的意思
+
+### 第三章pc https://nand2tetris-hdl.github.io/
+
+    Inc16(in=loop,out=pc);
+    Mux16(a=loop,b=pc,sel=inc,out=muxa);
+    Mux16(a=muxa,b=in,sel=load,out=loadb);
+    Mux16(a=loadb,b=false,sel=reset,out=cout);
+    Register(in=cout,load=true,out=out,out=loop);
+    
 
 ![image](https://github.com/weichen11011/co111a/blob/main/image.png)
 
-第四章mult https://github.com/davidsmithmke/nand2tetris-project4/blob/master/mult/Mult.asm
+inc16 為16位元遞增器，能使整個電路為1。第一個是在控制這個迴圈電路，後面兩個Mux分別是決定要寫入還是要重製。如果有要寫入的值會傳給Reg然後這裡的load設為true代表一定會寫入，之後再將值輸出然後再繼續回到迴圈。
 
-第五章是照著影片的教學一步步寫出來的
+### 第四章mult https://github.com/davidsmithmke/nand2tetris-project4/blob/master/mult/Mult.asm
+
+### 第五章是照著影片的教學一步步寫出來的
 影片網址: 
 1. https://www.youtube.com/watch?v=CBeVn-RSavk 這個是CPU的
 2. https://www.youtube.com/watch?v=ckYSlJtpXaE&t=4s 這個是memory的
@@ -18,7 +80,7 @@
 ![image](https://github.com/weichen11011/co111a/blob/main/%E8%9E%A2%E5%B9%95%E6%93%B7%E5%8F%96%E7%95%AB%E9%9D%A2%202022-12-29%20102543.png)
 ![image](https://github.com/weichen11011/co111a/blob/main/%E8%9E%A2%E5%B9%95%E6%93%B7%E5%8F%96%E7%95%AB%E9%9D%A2%202022-12-29%20102639.png)
 
-## CPU
+### CPU
 ![image](https://github.com/weichen11011/co111a/blob/main/2.PNG)
 ![image](https://github.com/weichen11011/co111a/blob/main/3.PNG)
 
