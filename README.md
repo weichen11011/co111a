@@ -181,13 +181,65 @@ inc 設為true 就是不管怎麼樣都會寫入。
 
 ## 期末 
 #### 邏輯閘程式碼除 *ALU* 修改自老師的專案 其餘皆改寫自期中所做的1~5章習題
-#### 測試程式 ALU_test.v Computer_test.v gates16_test.v PC_test.v DFF RAM16K_test.v sum.hack 修改自老師的專案
+#### 測試程式 ALU_test.v Computer_test.v gates16_test.v PC_test.v DFF RAM16K_test.v sum.hack DFF 修改自老師的專案
 
   * 2022/12/10 第一章完成
   * 2022/12/11 第二章完成
   * 2022/12/15 第三章除PC外完成
   * 2022/12/17 第五章和PC完成
   
+### 操作
+
+iverilog -o 檔案名稱 執行程式
+vvp 檔案名稱
+
+
+通常會將所有元件寫在同一個檔案，然後再寫各自元件的測試檔案。
+此為一個簡單的原件寫法
+
+        module(input,output)
+             內容
+        endmodule
+
+Mux測試程式
+
+    `include "./mux.v"
+
+    module main;
+        reg[15:0] a,b,c,d,e,f,g,h;
+        reg[2:0] sel;
+        wire[15:0] mux, mux4, mux8;
+
+        Mux16 g1(a,b,sel[0],mux);
+        Mux4Way16 g2(a,b,c,d,sel[1:0],mux4);
+        Mux8Way16 g3(a,b,c,d,e,f,g,h,sel[2:0],mux8);
+
+        initial 
+        begin
+            $monitor("%4dns sel =%d mux =%x mux4 =%x mux8 =%x",$stime,sel,mux,mux4,mux8);
+            a =16'h0;
+            b =16'h1;
+            c =16'h2;
+            d =16'h3;
+            e =16'h4;
+            f =16'h5;
+            g =16'h6;
+            h =16'h7;
+            sel =0; 
+        end
+
+        always #50 begin
+            sel = sel+1;
+        end
+
+        initial #500 $finish;
+    endmodule
+
+一開始會先設好要輸入的值，線路跟輸出的部分。測試的時候是使用類似迴圈的概念，一直跑到finish出現，有設一個類似時序的管控，當到達指定的數字時會做裡面的指令或停止。
+
+寫元件的邏輯跟hdl檔的思維差不多，但線路的部分需要設wire才能連上，和多加了測試程式。
+
+
 ### 心得
 在修這堂課以前，從來沒想過CPU的組成是由一大堆的基本邏輯閘慢慢堆疊出來的，也沒想過每個邏輯閘的用途。然而在這堂課中，將當初在數位邏輯學到的知識學以致用，用程式將邏輯閘的輸入輸出表示出來。不同於在書本上的學習，自己實做出來的印象反而更加的印象深刻。從最簡單、基礎的邏輯閘到最後成功做出CPU，獲得的成就感也很多，雖然從hdl語法轉到verilog之間，遇到了很多問題，主要還是兩者的邏輯還是稍微有點差異，讓我卡住了一段時間，但最難的還是測試，不像之前丟進程式自己跑就好，而是要自己想出如何測試才是正確的，雖然有時候會做到很崩潰，但總體來說還是很有趣的。
 
