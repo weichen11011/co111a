@@ -161,7 +161,23 @@ zr 為 out=0時，zr就為0，其他都為1， ng 就是當 out<0 時為0，其�
     
 inc 設為true 就是不管怎麼樣都會寫入。    
 
+## Memory
 
+![image](https://github.com/weichen11011/co111a/blob/main/4.PNG)
+
+    //load dmux
+    DMux4Way(in= load, sel= address[13..14], a=ramloada, b=ramloadb, c=screenload);
+    Or(a=ramloada, b=ramloadb, out=ramload);
+
+    //memory
+    RAM16K(in = in,load = ramload, address = address[0..13] , out = ramout);
+    Screen(in = in,load = screenload, address = address[0..12], out = screenout);
+    Keyboard(out = kbd);
+
+    //output mux
+    Mux4Way16(a=ramout, b=ramout, c=screenout, d=kbd, sel=address[13..14], out=out);
+
+因為Memory有分0(00)，16K(10)，24K(11) Dmux的作用就在於要選擇哪一個，如果address[13..14]的組合有1的出現就寫入RAM16K，沒有則寫入Screen。Keyboard和Screen都是一開始就給的，最用再用Mux將每個的值輸出。
 
 ## 期末 
 #### 邏輯閘程式碼除 *ALU* 修改自老師的專案 其餘皆改寫自期中所做的1~5章習題
