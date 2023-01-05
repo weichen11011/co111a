@@ -4,6 +4,8 @@
 
 ### 第二章的ALU是參考自老師的版本
 
+![image](https://github.com/weichen11011/co111a/blob/main/5.png)
+
     // zx
     Mux16(a = x, b[0..15] = false, sel = zx, out = ozx);
 
