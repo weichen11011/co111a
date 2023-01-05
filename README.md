@@ -2,7 +2,7 @@
 
 ## 期中
 
-### 第二章的ALU是參考自老師的版本
+### 第二章的ALU是參考自老師的版本 (先看一遍程式碼在自己打)
 
 ![image](https://github.com/weichen11011/co111a/blob/main/5.png)
 
@@ -59,7 +59,7 @@ if (out < 0) set ng = 1
 
 此為ALU輸出分別代表的意思
 
-### 第三章pc https://nand2tetris-hdl.github.io/
+### 第三章pc (第三章不會的部分都是去這個網址參考上面的圖) https://nand2tetris-hdl.github.io/ 
 
     Inc16(in=loop,out=pc);
     Mux16(a=loop,b=pc,sel=inc,out=muxa);
